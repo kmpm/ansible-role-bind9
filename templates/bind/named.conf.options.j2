@@ -97,7 +97,12 @@ logging {
     print-time yes;
   };
   {% for category in bind9_log_categories %}
-  category {{ category.name }} { {{ category.destination }}; };
+  category {{ category.name }} {
+	{% set categories = category.destination|string()|ternary([category.destination],category.destination) %}
+	{% for d in categories  %}
+	{{d}};
+	{% endfor %}
+  };
   {% endfor %}
 };
 {% endif %}
