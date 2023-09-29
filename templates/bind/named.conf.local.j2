@@ -6,6 +6,13 @@
 // organization
 //include "/etc/bind/zones.rfc1918";
 
+{% if bind9_rndc_control | bool %}
+include "/etc/bind/rndc.key";
+controls {
+    inet 127.0.0.1 allow { localhost; } keys { "rndc-key"; };
+};
+{% endif %}
+
 {% if bind9_masters|default() %}
 {%   for master in bind9_masters %}
 masters {{ master.name }} {

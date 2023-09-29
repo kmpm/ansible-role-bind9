@@ -46,6 +46,8 @@ bind9_our_neighbors:
 bind9_rndc_algorithm: hmac-md5
 # bind9_rndc_key:
 
+bind9_rndc_control: no
+
 # Global primaries for all zones (if configured as secondary)
 # bind9_masters:
 #  - name: ns-primary
