@@ -15,6 +15,10 @@
   changed_when: ddns_key.rc == 0
   when: item.update_keyfile is defined and not update_keyfile_tmp.stat.exists
 
+- name: Debug ddns_key
+  ansible.builtin.debug:
+    var: ddns_key
+
 - name: Copy DDNS key to control host
   ansible.builtin.fetch:
     src: "{{ bind9_keydir }}/{{ item.update_keyfile }}.private"
