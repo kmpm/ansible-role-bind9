@@ -45,7 +45,7 @@ statistics-channels {
 
 {% if zone.tsig |default() | bool and zone.update_keyfile is defined %}
 // {{ tsig_id }}
-include "{{ bind9_keydir }}/{{zone.update_keyfile}}.private";
+include "{{ bind9_keydir }}/{{zone.update_keyfile}}.key";
 {% endif %}
 
 zone "{{ zone.name }}" {
