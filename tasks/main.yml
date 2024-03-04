@@ -125,19 +125,19 @@
     - item.type | default(bind9_zone_type) == 'master'
     - item.update_keyfile | default()
 
-- name: Copy over DDNS private keys for zones with update_keyfile
-  ansible.builtin.copy:
-    src: bind/zones/{{ item.update_keyfile }}.private
-    dest: "{{ bind9_keydir }}/{{ item.update_keyfile }}.private"
-    owner: "{{ bind9_user }}"
-    group: "{{ bind9_group }}"
-    mode: "0600"
-  with_items:
-    - "{{ bind9_zones_static + bind9_zones_dynamic }}"
-  when:
-    - bind9_authoritative | default()
-    - item.type | default(bind9_zone_type) == 'master'
-    - item.update_keyfile | default()
+# - name: Copy over DDNS private keys for zones with update_keyfile
+#   ansible.builtin.copy:
+#     src: bind/zones/{{ item.update_keyfile }}.private
+#     dest: "{{ bind9_keydir }}/{{ item.update_keyfile }}.private"
+#     owner: "{{ bind9_user }}"
+#     group: "{{ bind9_group }}"
+#     mode: "0600"
+#   with_items:
+#     - "{{ bind9_zones_static + bind9_zones_dynamic }}"
+#   when:
+#     - bind9_authoritative | default()
+#     - item.type | default(bind9_zone_type) == 'master'
+#     - item.update_keyfile | default()
 
 # TODO: DNSSEC: implement key rollover
 - name: Determine if DNSSEC keys for zones already exist
